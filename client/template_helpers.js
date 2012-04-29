@@ -5,7 +5,7 @@ Template.content.auth_page = function() {
   return Session.get('auth_page');
 };
 Template.content.show_home = function() {
-  return !!Session.get('home');
+  return !!Session.get('home') || (Slides.find({current:true}).count()===0);
 };
 Template.auth.has_passcode = function() {
   return !!Session.get('passcode');
@@ -27,7 +27,7 @@ Template.slide_list.admin = function() {
   return Session.get("admin");
 };
 Template.slide_list.no_current = function() {
-  return !!Session.get('home') ? ' client_current' : '';
+  return (!!Session.get('home') || (Slides.find({current:true}).count()===0)) ? ' client_current' : '';
 };
 Template.index_slide.is_current = function() {
   return this.current ? " current" : "";
@@ -85,7 +85,7 @@ Template.slide_or_slideshow.slide = function() {
   }
 };
 Template.slide_or_slideshow.show_home = function() {
-  return !!Session.get('home');
+  return !!Session.get('home') || (Slides.find({current:true}).count()===0);
 };
 Template.slide_or_slideshow.slideshow = function() {
   return Shows.findOne(Session.get('show_id'));

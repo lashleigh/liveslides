@@ -7,9 +7,10 @@ Meteor.autosubscribe(function() {
   var show_id = Session.get('show_id');
   if (show_id) {
     Router.setShow(Session.get('show_id'));
+    Session.set('home', true);
     Meteor.subscribe('slides', show_id, function() {
-      if(Slides.find({current: true}).count()===0) 
-        Session.set('home', true);
+      if(Slides.find({current: true}).count()!==0) 
+        Session.set('home', false);
 
       var handler = Slides.find({}, {sort: {order: 1}}).observe({
         added: function(doc, before_idx) {
