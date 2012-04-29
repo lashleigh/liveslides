@@ -36,7 +36,7 @@ Template.slide_list.events = {
   },
   'click': function(e) {
     if($(e.srcElement).hasClass('first')) {
-      Session.set('home', true);
+      unset_current_slide();
     }
   }
 };

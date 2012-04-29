@@ -49,9 +49,13 @@ Template.current_slide.editing_body = function() {
   return Session.get('editingBody');
 }
 Template.current_slide.prettify = function() {
+  var that = this;
   Meteor.defer(function() {
     prettify();
     $('#slide_index').sortable('destroy');
+    $('#slide_index').stop().animate({scrollTop: (that.order-3)*41}, 400);
+    if(that)
+      $('#index').stop().animate({scrollTop: that.order*41}, 400);
     if(Session.get('admin')) {
       $('#slide_index').sortable().bind('sortupdate', function(e, ui) {
         var slide = Slides.findOne(ui.item[0].id);
