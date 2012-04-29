@@ -14,7 +14,6 @@ Meteor.publish('slides', function(show_id) {
   return Slides.find({show_id: show_id});
 });
 
-var server_password = 'supersecret';
 Meteor.methods({
   update: function(selector, updates, multi, passcode) {
     var show = Shows.findOne(selector.show_id);

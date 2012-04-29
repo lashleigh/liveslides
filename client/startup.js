@@ -27,7 +27,7 @@ var ShowsRouter = Backbone.Router.extend({
     Session.set('show_id', null);
     Session.set('current', null);
     Session.set('client_current', null);
-    this.navigate('shows');
+    this.navigate('shows', {trigger: true, replace: true});
   },
   newShow: function() {
   var that = this;

@@ -9,6 +9,7 @@ function update(selector, updates, multi) {
 function insert(attributes) {
   if(!Session.get('passcode')) return;
   attributes.show_id = Session.get('show_id');
+  attributes.order = attributes.order || Slides.find().count();
   Meteor.call('insert', attributes, Session.get('passcode'));
   updateShow({$set: {count: Slides.find().count(), updated_at: Date.now()}});
 }

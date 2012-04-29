@@ -7,6 +7,9 @@ Meteor.methods({
   },
   remove: function(selector) {
     Slides.remove(selector);
+  },
+  updateShow: function(show_id, updates) {
+    Shows.update(show_id, updates);
   }
 });
 function advanceShow(direction) {
