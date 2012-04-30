@@ -12,13 +12,13 @@ var ShowsRouter = Backbone.Router.extend({
   secret: function(show_id) {
     Session.set("show_id", show_id);
     Session.set('auth_page', true);
-    this.navigate('shows/'+show_id+'/secret', {trigger: true, replace: true});
+    this.navigate('shows/'+show_id+'/secret');
   },
   secret_url: function(show_id, secret) {
     Session.set("show_id", show_id);
-    Session.set('auth_page', true);
+    Session.set('auth_page', false);
     Session.set('passcode', secret);
-    this.navigate('shows/'+show_id+'/secret='+secret, {trigger: true, replace: true});
+    set_admin(secret);
   },
   main: function (show_id) {
     Session.set("show_id", show_id);
@@ -27,24 +27,24 @@ var ShowsRouter = Backbone.Router.extend({
     Session.set('show_id', null);
     Session.set('current', null);
     Session.set('client_current', null);
-    this.navigate('shows', {trigger: true, replace: true});
+    this.navigate('shows');
   },
   newShow: function() {
-  var that = this;
+    var that = this;
     Meteor.call('generateSecret', function(error, secretCode) {
       if(secretCode) {
         Meteor.call('newShow', secretCode, function(error, show_id) {
-          //Router.secret(show_id);
+          Session.set("show_id", show_id);
           Session.set('passcode', secretCode);
           Session.set('auth_page', true);
-          that.navigate('shows/'+show_id+'/secret='+secretCode, {trigger:true, replace: true});
+          that.navigate('shows/'+show_id+'/secret='+secretCode, {replace: true});
         });
       }
     })
   },
   setShow: function (show_id) {
     if(Session.get('auth_page')) return;
-    this.navigate('shows/'+show_id, {trigger: true, replace: true});
+    this.navigate('shows/'+show_id);
   }
 });
 

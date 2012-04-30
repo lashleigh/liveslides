@@ -4,13 +4,18 @@ Template.slideshows.events = {
   }
 }
 Template.show.events = {
-  'click': function() {
-     Session.set('show_id', this._id);
-   }
+  'click': function() { Session.set('show_id', this._id); }
 };
 Template.index_slide.events = {
-  'click .past': function(e) {if($(e.srcElement).hasClass('remove')) return; set_current_slide(this._id);},
-  'click .future': function(e) {if($(e.srcElement).hasClass('remove')) return; if(Session.get('admin')) set_current_slide(this._id);},
+  'click .past': function(e) {
+    //TODO find a way to stop propagation in the remove event instead
+    if($(e.srcElement).hasClass('remove')) return; 
+    set_current_slide(this._id);
+  },
+  'click .future': function(e) {
+    if($(e.srcElement).hasClass('remove')) return; 
+    if(Session.get('admin')) set_current_slide(this._id);
+  },
   'click .remove': function() {
     remove_slide(this._id);
   }
