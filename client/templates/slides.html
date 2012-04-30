@@ -1,0 +1,48 @@
+<template name="slide_list">
+  <div id="index">
+    <h3>Slides</h3>
+    <ol start='0' id='slide_index'>
+      <li class='first{{no_current}}' >
+        {{show_title}}
+      </li>
+      {{#each slides}}
+        {{> index_slide}}
+      {{/each}}
+    </ol>
+    {{#if admin}}
+      <input type='button' class='btn btn-primary' id='new-slide' value='Another!' />
+      <input type='button' class='btn btn-success' id='presentation-mode' value='Present' />
+      <input type='button' class='btn btn-danger' id='remove-show' value='Destroy' />
+    {{/if}}
+  </div>
+</template>
+<template name="index_slide">
+  <li class="slide-entry{{is_current}}{{is_client_current}}{{is_future}}" id="{{_id}}">
+    {{title}}
+    {{#if admin}}
+      <a href="#" class="admin-delete"><img class='remove' src="/images/delete.png" /></a>
+    {{/if}}
+  </li>
+</template>
+<template name="current_slide">
+  <h1 id="slide-title">{{title}}</h1>
+  <div id="slide-body">
+    {{#if editing_body}}
+      {{> edit_body}}
+      {{#if admin}}
+      <input id='save-button' type='button' class='btn btn-warning' value='Save' />
+      <input id='cancel-button' type='button' class='btn btn-warning' value='Cancel' />
+      {{/if}}
+    {{else}}
+      {{#markdown}}{{{body}}}{{/markdown}}
+      {{#if admin}}
+      <input id='edit-button' type='button' class='btn btn-warning' value='Edit body' />
+      {{/if}}
+    {{/if}}
+  </div>
+  {{prettify}}
+</template>
+
+<template name="edit_body">
+  <textarea id="body-box">{{body}}</textarea>
+</template>

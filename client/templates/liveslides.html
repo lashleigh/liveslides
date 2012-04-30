@@ -1,0 +1,30 @@
+<head>
+  <title>liveslides</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  <div class='container-fluid'>
+    <div class="row-fluid">
+    {{> content}}
+  </div>
+  </div>
+</body>
+
+<template name="content">
+  {{#if has_show}}
+    {{#if auth_page}}
+      {{> auth}}
+    {{else}}
+    <div class="span9">
+      {{> slide_or_slideshow}}
+    </div>
+    <div class="span3">
+      {{> slide_list}}
+    </div>
+    {{/if}}
+  {{else}}
+    {{> slideshows}}
+  {{/if}}
+</template>
+

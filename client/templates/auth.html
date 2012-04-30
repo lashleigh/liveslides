@@ -1,0 +1,23 @@
+<template name="auth">
+  <div>
+    {{#if has_passcode}}
+      <div class="hero-unit">
+        <h1>{{passcode}}</h1>
+        <p>You will need to enter this code in the future in order to edit slides.</p>
+        <p>Someday meteor will have auth working for real, this is just a temporary thing.</p>
+        <p>
+          <input id='ok' class="btn btn-primary btn-large" type='button' value='OK, take me to the show!' />
+        </p>
+      </div>
+    {{else}}
+      <div class="hero-unit">
+        <h2> Please enter your passcode to edit the show</h2>
+        <p>
+          <input id='auth_input' />
+          <input id='auth_submit' class="btn btn-primary btn-large" type='button' value='Authorize that' />
+        </p>
+      </div>
+    {{/if}}
+  </div>
+</template>
+

@@ -1,0 +1,30 @@
+<template name="slideshows">
+  <button class='button big'>New Slideshow</button>
+  <div id='all_shows'>
+    {{#each shows}}
+      {{> show}}
+    {{/each}}
+  </div>
+</template>
+<template name="show">
+  <div class='slideshow'>
+    <span id='slide-title'>
+      {{title}}
+    </span>
+    <span class='body'>
+      {{#markdown}}{{body}}{{/markdown}}
+    </span>
+  </div>
+</template>
+<template name="slide_or_slideshow">
+  {{#if show_home}}
+    {{#with slideshow}}
+      {{> current_slide}}
+    {{/with}}
+  {{else}}
+    {{#with slide}}
+      {{> current_slide}}
+    {{/with}}
+  {{/if}}
+</template>
+
